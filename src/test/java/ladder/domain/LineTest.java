@@ -23,36 +23,6 @@ class LineTest {
         Line line = new Line(nodes);
     }
 
-    @DisplayName("지정한 새로운 노드를 추가해 준다")
-    @Test
-    public void addNode() throws Exception {
-        //given
-        Line line = new Line();
-        Node node = new Node(1, new Way(false, false));
-        //when
-        line = line.addNode(node);
-
-        //then
-        assertThat(line.size()).isEqualTo(1);
-    }
-
-    @DisplayName("다음 노드를 생성후 더해준다: 이미 노드가 하나 이상 있을 때")
-    @Test
-    public void addRandomNextNode_success_leastOne() throws Exception {
-        //given
-        Line line = new Line();
-        Node node = new Node(0, new Way(false, true));
-        line = line.addNode(node);
-
-        //when
-        line = line.addRandomNextNode(true);
-
-        //then
-        assertThat(line.size()).isEqualTo(2);
-        assertTrue(line.getNode(1).isMovableLeft());
-        assertFalse(line.getNode(1).isMovableRight());
-    }
-
     @DisplayName("다음 노드를 생성후 더해준다: 노드가 하나도 없을 때")
     @Test
     public void addRandomNextNode_success_nodeEmpty() throws Exception {
