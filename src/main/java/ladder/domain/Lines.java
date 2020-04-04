@@ -22,6 +22,14 @@ public class Lines {
         return new Lines(merge);
     }
 
+    public int move(final int nodeNumber) {
+        int move = nodeNumber;
+        for (Line line : lines) {
+            move = line.getNode(move).move();
+        }
+        return move;
+    }
+
     public int size() {
         return this.lines.size();
     }

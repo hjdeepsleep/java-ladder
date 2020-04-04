@@ -23,4 +23,28 @@ class LinesTest {
         assertThat(lines.size()).isEqualTo(1);
         assertThat(lines.getLine(0).getNode(0).getIndex()).isEqualTo(2);
     }
+
+    @DisplayName("사다리 이동 결과 확인")
+    @Test
+    public void move() throws Exception {
+        //given
+        Lines lines = new Lines(
+                Arrays.asList(
+                        new Line(Arrays.asList(
+                                new Node(0, new Way(false, true)),
+                                new Node(1, new Way(true, false)))
+                        ),
+                        new Line(Arrays.asList(
+                                new Node(0, new Way(false, true)),
+                                new Node(1, new Way(true, false)))
+                        )));
+
+        //when
+        int move1 = lines.move(0);
+        int move2 = lines.move(1);
+
+        //then
+        assertThat(move1).isEqualTo(0);
+        assertThat(move2).isEqualTo(1);
+    }
 }
