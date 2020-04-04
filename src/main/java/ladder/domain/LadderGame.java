@@ -1,12 +1,18 @@
 package ladder.domain;
 
+import ladder.exception.LadderException;
+
 public class LadderGame {
+
+    private static final String USER_AND_RESULT_COUNT_MATCH_ERR_MST =
+            "참가자와 게임 결과의 수가 일치해야 합니다.";
 
     private final Players players;
     private final Lines lines;
     private final LadderGameResult ladderGameResult;
 
     public LadderGame(Players players, Lines lines, LadderGameResult result) {
+        validateUserAndResult(players, result);
         this.players = players;
         this.lines = lines;
         this.ladderGameResult = result;
@@ -16,10 +22,16 @@ public class LadderGame {
                                           final int height,
                                           final LadderGameResult result) {
         LadderGenerator ladderGenerator =
-                new LadderGenerator(players.getPlayersCount(), height);
+                new LadderGenerator(players.size(), height);
         Lines lines = ladderGenerator.generateLines();
 
         return new LadderGame(players, lines, result);
+    }
+
+    private void validateUserAndResult(Players players, LadderGameResult result) {
+        if (players.size() != result.size()) {
+            throw new LadderException(USER_AND_RESULT_COUNT_MATCH_ERR_MST);
+        }
     }
 
     public Node getPlayerResult(String playerName) {
