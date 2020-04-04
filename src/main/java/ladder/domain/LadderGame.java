@@ -9,18 +9,18 @@ public class LadderGame {
 
     private final Players players;
     private final Lines lines;
-    private final LadderGameResult ladderGameResult;
+    private final LadderPrize ladderPrize;
 
-    public LadderGame(Players players, Lines lines, LadderGameResult result) {
+    public LadderGame(Players players, Lines lines, LadderPrize result) {
         validateUserAndResult(players, result);
         this.players = players;
         this.lines = lines;
-        this.ladderGameResult = result;
+        this.ladderPrize = result;
     }
 
     public static LadderGame createLadder(final Players players,
                                           final int height,
-                                          final LadderGameResult result) {
+                                          final LadderPrize result) {
         LadderGenerator ladderGenerator =
                 new LadderGenerator(players.size(), height);
         Lines lines = ladderGenerator.generateLines();
@@ -28,7 +28,7 @@ public class LadderGame {
         return new LadderGame(players, lines, result);
     }
 
-    private void validateUserAndResult(Players players, LadderGameResult result) {
+    private void validateUserAndResult(Players players, LadderPrize result) {
         if (players.size() != result.size()) {
             throw new LadderException(USER_AND_RESULT_COUNT_MATCH_ERR_MST);
         }
